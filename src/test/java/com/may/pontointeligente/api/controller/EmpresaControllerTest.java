@@ -57,13 +57,10 @@ public class EmpresaControllerTest {
 		BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString()))
 				.willReturn(Optional.of(this.obterDadosEmpresa()));
 
-		mvc.perform(MockMvcRequestBuilders.get(BUSCAR_EMPRESA_CNPJ_URL + CNPJ)
-				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.data.id").value(ID))
+		mvc.perform(MockMvcRequestBuilders.get(BUSCAR_EMPRESA_CNPJ_URL + CNPJ).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(jsonPath("$.data.id").value(ID))
 				.andExpect(jsonPath("$.data.razaoSocial", equalTo(RAZAO_SOCIAL)))
-				.andExpect(jsonPath("$.data.cnpj", equalTo(CNPJ)))
-				.andExpect(jsonPath("$.errors").isEmpty());
+				.andExpect(jsonPath("$.data.cnpj", equalTo(CNPJ))).andExpect(jsonPath("$.errors").isEmpty());
 	}
 
 	private Empresa obterDadosEmpresa() {
@@ -75,4 +72,3 @@ public class EmpresaControllerTest {
 	}
 
 }
-
